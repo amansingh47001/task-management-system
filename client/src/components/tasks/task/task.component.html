@@ -8,7 +8,7 @@
 
   <app-dialog
     [dialogWidth]="'max-w-[90%] md:max-w-md'"
-    [title]="'Add Task'"
+    [title]="mode ==='edit' ? 'Edit Task':'Add Task'"
     [isOpen]="isDialogOpen"
     (close)="closeDialog()"
   >
