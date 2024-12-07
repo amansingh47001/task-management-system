@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -20,7 +20,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   registerForm = new FormGroup(
     {
       firstName: new FormControl('', [
@@ -46,6 +46,12 @@ export class SignupComponent {
     private toastr: ToastrService
   ) {}
 
+  ngOnInit() {
+    if (localStorage.getItem('user')) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+
   onSubmit() {
     if (this.registerForm.valid) {
       const { firstName, lastName, email, password } = this.registerForm.value;
@@ -55,7 +61,6 @@ export class SignupComponent {
         email: email || '',
         password: password || '',
       };
-
 
       this.UserService.registerUser(payload).subscribe(
         (res: any) => {
