@@ -1,0 +1,101 @@
+<div>
+ 
+  <button
+    (click)="openDialog()"
+    class="bg-sky-600 hover:bg-sky-700 text-white font-medium py-2 px-4 rounded-md"
+  >
+    <img src="/icons/add-icon.svg" class="text-white" width="24" height="24" />
+  </button>
+
+  <app-dialog
+    [dialogWidth]="'max-w-md'"
+    [title]="'Add Task'"
+    [isOpen]="isDialogOpen"
+    (close)="closeDialog()"
+  >
+    <form
+      [formGroup]="taskForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4 w-full"
+    >
+      <div class="w-full space-y-1">
+        <label for="title" class="font-medium text-neutral-700 text-sm"
+          >Title</label
+        >
+        <input
+          formControlName="title"
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Enter title"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        />
+
+        <p
+          *ngIf="
+            (taskForm.get('title')?.dirty || taskForm.get('title')?.touched) &&
+            taskForm.get('title')?.hasError('required')
+          "
+          class="text-red-600 text-xs font-medium"
+        >
+          Title is required
+        </p>
+      </div>
+      <div class="w-full space-y-1">
+        <label for="status" class="font-medium text-neutral-700 text-sm"
+          >Status</label
+        >
+        <select
+          formControlName="status"
+          id="status"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        >
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+        </select>
+
+        <p
+          *ngIf="
+            (taskForm.get('status')?.dirty ||
+              taskForm.get('status')?.touched) &&
+            taskForm.get('status')?.hasError('required')
+          "
+          class="text-red-600 text-xs font-medium"
+        >
+          Status is required
+        </p>
+      </div>
+      <div class="w-full space-y-1">
+        <label for="description" class="font-medium text-neutral-700 text-sm"
+          >Description</label
+        >
+        <textarea
+          rows="4"
+          formControlName="description"
+          id="description"
+          name="description"
+          placeholder="Enter description"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700 resize-none"
+        ></textarea>
+
+        <p
+          *ngIf="
+            (taskForm.get('description')?.dirty ||
+              taskForm.get('description')?.touched) &&
+            taskForm.get('description')?.hasError('required')
+          "
+          class="text-red-600 text-xs font-medium"
+        >
+          Description is required
+        </p>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-sky-600 hover:bg-sky-700 text-white font-medium py-2 px-4 rounded-md"
+      >
+        Add Task
+      </button>
+    </form>
+  </app-dialog>
+</div>

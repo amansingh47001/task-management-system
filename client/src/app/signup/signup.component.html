@@ -1,0 +1,189 @@
+<div class="flex h-screen">
+  <div class="h-full w-full basis-3/5">
+    <img
+      src="/assets/morning-notes.jpg"
+      alt="Login image"
+      class="h-full w-full object-cover"
+    />
+  </div>
+
+  <div class="basis-2/5 flex justify-center items-center">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4 w-[26rem] px-8"
+    >
+      <h1 class="text-3xl font-bold">Register</h1>
+
+      <div class="w-full flex gap-2 items-start">
+        <div class="w-full space-y-1">
+          <label for="firstName" class="font-medium text-neutral-700 text-sm"
+            >First Name<span class="text-red-500">*</span></label
+          >
+          <input
+            formControlName="firstName"
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="Enter firstName"
+            class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+          />
+
+          <p
+            *ngIf="
+              registerForm.get('firstName')?.hasError('required') &&
+              (registerForm.get('firstName')?.dirty ||
+                registerForm.get('firstName')?.touched)
+            "
+            class="text-red-600 text-xs font-medium"
+          >
+            First name is required
+          </p>
+        </div>
+        <div class="w-full space-y-1">
+          <label for="lastName" class="font-medium text-neutral-700 text-sm"
+            >Last Name<span class="text-red-500">*</span></label
+          >
+          <input
+            formControlName="lastName"
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Enter lastName"
+            class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+          />
+
+          <p
+            *ngIf="
+              registerForm.get('lastName')?.hasError('required') &&
+              (registerForm.get('lastName')?.dirty ||
+                registerForm.get('lastName')?.touched)
+            "
+            class="text-red-600 text-xs font-medium"
+          >
+            Last name is required
+          </p>
+        </div>
+      </div>
+
+      <div class="w-full space-y-1">
+        <label for="email" class="font-medium text-neutral-700 text-sm"
+          >Email<span class="text-red-500">*</span></label
+        >
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        />
+        <div
+          *ngIf="
+            registerForm.get('email')?.dirty ||
+            registerForm.get('email')?.touched
+          "
+        >
+          <p
+            *ngIf="registerForm.get('email')?.hasError('required')"
+            class="text-red-600 text-xs font-medium"
+          >
+            Email is required
+          </p>
+          <p
+            *ngIf="registerForm.get('email')?.hasError('customEmail')"
+            class="text-red-600 text-xs font-medium"
+          >
+            Email is not valid
+          </p>
+        </div>
+      </div>
+      <div class="w-full space-y-1">
+        <label for="password" class="font-medium text-neutral-700 text-sm"
+          >Password<span class="text-red-500">*</span></label
+        >
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        />
+        <div
+          *ngIf="
+            registerForm.get('password')?.dirty ||
+            registerForm.get('password')?.touched
+          "
+          class="alert alert-danger"
+        >
+          <p
+            *ngIf="registerForm.get('password')?.hasError('required')"
+            class="text-red-600 text-xs font-medium"
+          >
+            Password is required
+          </p>
+          <p
+            *ngIf="registerForm.get('password')?.hasError('strongPassword')"
+            class="text-red-600 text-xs font-medium"
+          >
+            Password should be at least 8 characters long and should contain one
+            number, one uppercase character, one lowercase character and one
+            special character
+          </p>
+        </div>
+      </div>
+      <div class="w-full space-y-1">
+        <label
+          for="confirmPassword"
+          class="font-medium text-neutral-700 text-sm"
+          >Confirm Password<span class="text-red-500">*</span></label
+        >
+        <input
+          formControlName="confirmPassword"
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Enter confirm password"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        />
+        <div
+          *ngIf="
+            registerForm.get('confirmPassword')?.dirty ||
+            registerForm.get('confirmPassword')?.touched
+          "
+          class="alert alert-danger"
+        >
+          <p
+            *ngIf="registerForm.get('confirmPassword')?.hasError('required')"
+            class="text-red-600 text-xs font-medium"
+          >
+            Confirm password is required
+          </p>
+          <p
+            *ngIf="
+              registerForm.get('confirmPassword')?.hasError('passwordMismatch')
+            "
+            class="text-red-600 text-xs font-medium"
+          >
+            Passwords do not match
+          </p>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="bg-sky-600 hover:bg-sky-700 text-white font-medium py-2 px-4 rounded-md"
+      >
+        Register
+      </button>
+      <div class="text-center">
+        Have an account?
+        <a
+          routerLink="/"
+          class="underline underline-offset-1 cursor-pointer duration-150 hover:text-sky-600"
+          >Login</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
