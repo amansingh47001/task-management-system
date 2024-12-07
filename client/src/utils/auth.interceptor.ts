@@ -20,7 +20,6 @@ export function authInterceptor(
   return next(newReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        console.log('inside catch error', error);
         // If a 401 error occurs, call the logout function from the AuthService
         authService.logout().subscribe((res: any) => {
           localStorage.clear();

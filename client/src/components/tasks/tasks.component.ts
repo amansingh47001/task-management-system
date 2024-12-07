@@ -54,7 +54,6 @@ export class TasksComponent {
         this.allTasks = this.tasks;
       },
       (error) => {
-        console.error('error: ', error);
         this.toastr.error(error?.error?.message || 'Something went wrong');
       }
     );

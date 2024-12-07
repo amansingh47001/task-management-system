@@ -29,7 +29,6 @@ export class DashboardComponent {
         this.router.navigate(['/']);
       },
       (error) => {
-        console.error('error: ', error);
         this.toastr.error(error?.error?.message || 'User login failed');
       }
     );
