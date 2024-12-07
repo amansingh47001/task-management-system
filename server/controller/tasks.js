@@ -109,7 +109,9 @@ module.exports.updateTaskStatus = async (req, res) => {
       return res.status(200).json({ message: "Task not found" });
     }
 
-    return res.status(200).json({ message: "Task status changed successfully" });
+    return res
+      .status(200)
+      .json({ message: "Task status changed successfully" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Something went wrong" });
@@ -121,7 +123,7 @@ module.exports.getTasks = async (req, res) => {
     const tasks = await Task.find(
       { user: req.user.userId },
       { user: 0, __v: 0 }
-    );
+    ).sort({ createdAt: -1 });
 
     return res
       .status(200)
