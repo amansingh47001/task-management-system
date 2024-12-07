@@ -3,23 +3,23 @@
 ###### Setup: Clone repository
 
 ###### Client App
-**Step: 1.** go into client folder
-**Step: 2.** Do npm i
-**Step: 3.** npm start
+1. Go into client folder
+2. Do npm i
+3. npm start
 
 ###### Server App
-**Step: 1.** Go into server folder
-**Step: 2.** Do npm i
-**Step: 3.** Add Env
-`
+1. Go into server folder
+2. Do npm i
+3. Add Env
+```
     NODE_ENV=development
     PORT=9000
     CONNECTION_STRING=
     JWT_SECRET=
-`
-**Step: 4.** Do npm start
+```
+4. Do npm start
 
-#### Login Page
+### Login Page
 ![Login](./client//public//task/login-page.png)
 
 ### Register Page
