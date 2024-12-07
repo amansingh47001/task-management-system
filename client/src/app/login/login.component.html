@@ -1,0 +1,82 @@
+<div class="flex justify-center items-center h-screen">
+  <div class="h-full w-full md:basis-3/5 hidden md:block">
+    <img
+      src="/assets/notes.jpg"
+      alt="Login image"
+      class="h-full w-full object-cover"
+    />
+  </div>
+
+  <div class="md:basis-2/5 flex justify-center items-center">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4 md:w-[24rem] px-8"
+    >
+      <h1 class="text-3xl font-bold">Login</h1>
+
+      <div class="w-full space-y-1">
+        <label for="email" class="font-medium text-neutral-700 text-sm"
+          >Email</label
+        >
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        />
+
+        <p
+          *ngIf="
+            (loginForm.get('email')?.dirty ||
+              loginForm.get('email')?.touched) &&
+            loginForm.get('email')?.hasError('required')
+          "
+          class="text-red-600 text-xs font-medium"
+        >
+          Email is required
+        </p>
+      </div>
+      <div class="w-full space-y-1">
+        <label for="password" class="font-medium text-neutral-700 text-sm"
+          >Password</label
+        >
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-sky-700"
+        />
+
+        <p
+          *ngIf="
+            (loginForm.get('password')?.dirty ||
+              loginForm.get('password')?.touched) &&
+            loginForm.get('password')?.hasError('required')
+          "
+          class="text-red-600 text-xs font-medium"
+        >
+          Password is required
+        </p>
+      </div>
+      <button
+        type="submit"
+        class="bg-sky-600 hover:bg-sky-700 text-white font-medium py-2 px-4 rounded-md"
+      >
+        Login
+      </button>
+      <div class="text-center">
+        Don't have an account?
+        <a
+          routerLink="/register"
+          class="underline underline-offset-1 cursor-pointer duration-150 hover:text-sky-600"
+          >Sign up</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
