@@ -14,9 +14,9 @@ module.exports.addTask = async (req, res) => {
       return res.status(400).json({ message: "Status is required" });
     }
 
-    const taskExist = await Task.findOne({title});
+    const taskExist = await Task.findOne({ title });
 
-    if(taskExist){
+    if (taskExist) {
       return res.status(400).json({ message: "Task already exists" });
     }
 
@@ -53,14 +53,12 @@ module.exports.updateTask = async (req, res) => {
       return res.status(400).json({ message: "Status is required" });
     }
 
-    const taskExist = await Task.findOne({title});
+    const taskExist = await Task.findOne({ title });
 
-    if(taskExist && taskExist._id.toString() !== id){
-      return res.status(400).json({ message: "Task with same title already exists" });
-    }
-    
-    if(taskExist){
-      return res.status(400).json({ message: "Task already exists" });
+    if (taskExist && taskExist._id.toString() !== id) {
+      return res
+        .status(400)
+        .json({ message: "Task with same title already exists" });
     }
 
     await Task.findByIdAndUpdate(
@@ -86,6 +84,32 @@ module.exports.deleteTask = async (req, res) => {
     }
 
     return res.status(200).json({ message: "Task deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+module.exports.updateTaskStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ message: "Status is required" });
+    }
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    if (!updatedTask) {
+      return res.status(200).json({ message: "Task not found" });
+    }
+
+    return res.status(200).json({ message: "Task status changed successfully" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Something went wrong" });

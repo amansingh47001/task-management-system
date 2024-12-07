@@ -6,8 +6,6 @@ module.exports.register = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
 
-    console.log(req.body);
-
     if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -49,15 +47,29 @@ module.exports.login = async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-    }
+    };
 
-    return res
-      .status(200)
-      .json({
-        data: userData,
-        token: token,
-        message: "User logged in successfully",
-      });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: "lax",
+      maxAge: 86400000,
+    });
+
+    return res.status(200).json({
+      data: userData,
+      message: "User logged in successfully",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+module.exports.logout = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    return res.status(200).json({ message: "User logged out successfully" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Something went wrong" });

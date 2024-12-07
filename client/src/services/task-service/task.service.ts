@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 export type Tasks = {
   id: string;
@@ -21,48 +22,27 @@ type Task = {
 export class TaskService {
   public tasks: Tasks[] = [];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getAllTasks() {
-    const data = [
-      {
-        id: 1,
-        name: 'Task 1',
-        description: 'Task 1 Description',
-      },
-      {
-        id: 2,
-        name: 'Task 2',
-        description: 'Task 2 Description',
-      },
-      {
-        id: 3,
-        name: 'Task 3',
-        description: 'Task 3 Description',
-      },
-    ];
-
-    return data;
-  }
-
-  addTask(data: Task) {
-    console.log('data: ', data);
-    // this.tasks.push(data);
-  }
-
-  editTask(id: string, data: Task) {
-    console.log('id: ', id);
-    console.log('data: ', data);
-    this.tasks = this.tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, ...data };
-      }
-      return task;
+    return this.http.get('http://localhost:9000/api/tasks', {
+      withCredentials: true,
     });
   }
 
+  addTask(data: Task) {
+    return this.http.post('http://localhost:9000/api/task', data);
+  }
+
+  editTask(id: string, data: Task) {
+    return this.http.put(`http://localhost:9000/api/task/${id}`, data);
+  }
+
+  updateTaskStatus(id: string, status: 'pending' | 'completed') {
+    return this.http.patch(`http://localhost:9000/api/task/${id}`, { status });
+  }
+
   deleteTask(id: string) {
-    console.log(id);
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+    return this.http.delete(`http://localhost:9000/api/task/${id}`);
   }
 }

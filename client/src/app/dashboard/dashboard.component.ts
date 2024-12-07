@@ -1,22 +1,37 @@
 import { Component } from '@angular/core';
-import { DialogComponent } from '../../common/dialog/dialog.component';
-import { TaskComponent } from '../../components/tasks/task/task.component';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../services/user/user.service';
+import { Router } from '@angular/router';
+import { TasksComponent } from '../../components/tasks/tasks.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [DialogComponent, TaskComponent],
+  imports: [TasksComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  isDialogOpen = false;  // Control the dialog's visibility
+  isDialogOpen = false;
+  tasks = [];
 
-  openDialog() {
-    this.isDialogOpen = true;  // Open the dialog
-  }
+  constructor(
+    private toastr: ToastrService,
+    private UserService: UserService,
+    private router: Router
+  ) {}
 
-  closeDialog() {
-    this.isDialogOpen = false;  // Close the dialog
+  logout() {
+    this.UserService.logout().subscribe(
+      (res: any) => {
+        localStorage.clear();
+        this.toastr.success(res?.message || 'User logged out successfully');
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        console.error('error: ', error);
+        this.toastr.error(error?.error?.message || 'User login failed');
+      }
+    );
   }
 }
