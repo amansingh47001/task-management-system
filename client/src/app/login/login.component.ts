@@ -39,7 +39,6 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']);
         },
         (error) => {
-          console.error('error: ', error);
           this.toastr.error(error?.error?.message || 'User login failed');
         }
       );

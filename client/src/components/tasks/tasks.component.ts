@@ -40,7 +40,9 @@ export class TasksComponent {
         this.tasks = res?.data;
       },
       (error) => {
-        console.error('error: ', error);
+        this.toastr.error(error?.error?.message || 'Something went wrong');
+        this.allTasks = [];
+        this.tasks = [];
       }
     );
   }
@@ -53,6 +55,7 @@ export class TasksComponent {
       },
       (error) => {
         console.error('error: ', error);
+        this.toastr.error(error?.error?.message || 'Something went wrong');
       }
     );
   }
@@ -64,7 +67,6 @@ export class TasksComponent {
   statusFilter(event: Event) {
     const target = event.target as HTMLSelectElement;
     const value = target.value;
-    console.log('event: ', value);
     if (value)
       this.tasks = this.allTasks.filter((task) => task.status === value);
     else this.tasks = this.allTasks;
@@ -73,11 +75,9 @@ export class TasksComponent {
   handleStatusChange(event: Event, id: string) {
     const target = event.target as HTMLSelectElement;
     const value = target.value as 'pending' | 'completed';
-    console.log('event: ', value);
 
     this.taskService.updateTaskStatus(id, value).subscribe(
       (res: any) => {
-        console.log('response: ',res);
         this.tasks = this.tasks.map((task) =>
           task._id === id ? { ...task, status: value } : task
         );
@@ -85,7 +85,7 @@ export class TasksComponent {
         this.toastr.success(res?.message || 'Task status updated successfully');
       },
       (error) => {
-        console.error('error: ', error);
+        this.toastr.error(error?.error?.message || 'Something went wrong');
       }
     );
   }

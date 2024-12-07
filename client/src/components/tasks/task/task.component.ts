@@ -65,7 +65,6 @@ export class TaskComponent {
             this.closeDialog();
           },
           (error) => {
-            console.error('error: ', error);
             this.toastr.error(error?.error?.message || 'Task update failed');
           }
         );
@@ -77,7 +76,6 @@ export class TaskComponent {
             this.closeDialog();
           },
           (error) => {
-            console.error('error: ', error);
             this.toastr.error(error?.error?.message || 'Task add failed');
           }
         );

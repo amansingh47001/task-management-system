@@ -63,7 +63,6 @@ export class SignupComponent {
           this.router.navigate(['/']);
         },
         (error) => {
-          console.error('error: ', error);
           this.toastr.error(error?.error?.message || 'Failed to register user');
         }
       );
