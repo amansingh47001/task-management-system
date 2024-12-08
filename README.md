@@ -29,10 +29,10 @@
 ![Dashboard](./client//public//task/dashboard.png)
 
 ### Add Task
-![Register](./client//public//task/add-task.png)
+![AddTask](./client//public//task/add-task.png)
 
 ### Update Task
-![Register](./client//public//task/update-task.png)
+![UpdateTask](./client//public//task/update-task.png)
 
 ### Logout
-![Register](./client//public//task/logout-dialog.png)
+![Logout](./client//public//task/logout-dialog.png)
