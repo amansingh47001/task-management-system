@@ -63,6 +63,7 @@ export class TaskComponent {
             this.toastr.success(res?.message || 'Task updated successfully');
             this.taskUpdated.emit();
             this.closeDialog();
+            this.taskForm.reset({status: "pending"});
           },
           (error) => {
             this.toastr.error(error?.error?.message || 'Task update failed');
@@ -74,6 +75,7 @@ export class TaskComponent {
             this.toastr.success(res?.message);
             this.taskUpdated.emit();
             this.closeDialog();
+            this.taskForm.reset({status: "pending"});
           },
           (error) => {
             this.toastr.error(error?.error?.message || 'Task add failed');
