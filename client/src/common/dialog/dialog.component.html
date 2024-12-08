@@ -14,7 +14,7 @@
     >
       <img src="/icons/close-icon.svg" class="w-full h-full object-contain" />
     </span>
-    <h2 class="text-2xl font-semibold mb-4">{{ title }}</h2>
+    <h2 *ngIf="title" class="text-2xl font-semibold mb-4">{{ title }}</h2>
     <ng-content></ng-content>
   </div>
 </div>

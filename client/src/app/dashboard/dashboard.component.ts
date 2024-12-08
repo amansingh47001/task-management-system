@@ -3,11 +3,12 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 import { TasksComponent } from '../../components/tasks/tasks.component';
+import { DialogComponent } from '../../common/dialog/dialog.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [TasksComponent],
+  imports: [TasksComponent, DialogComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -20,6 +21,14 @@ export class DashboardComponent {
     private UserService: UserService,
     private router: Router
   ) {}
+
+  openDialog() {
+    this.isDialogOpen = true;
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
+  }
 
   logout() {
     this.UserService.logout().subscribe(

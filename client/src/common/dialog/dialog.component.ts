@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DialogComponent {
   @Input() isOpen: boolean = false;  // Control the visibility of the dialog
-  @Input() title: string = 'Title';  // Title of the dialog
+  @Input() title: string = '';  // Title of the dialog
   @Input() dialogWidth: string = 'max-w-sm';  // Default width, can be customized
   @Input() dialogContent: string = '';  // Default content
   @Output() close = new EventEmitter<void>();  // Event to close the dialog

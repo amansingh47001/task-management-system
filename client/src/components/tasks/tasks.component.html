@@ -2,7 +2,7 @@
   <div class="inline-flex gap-2 items-center">
     <h2 class="text-2xl font-bold">Tasks</h2>
 
-    <app-task (taskUpdated)="onTaskUpdated()" />
+    <app-task [mode]="'add'" (taskUpdated)="onTaskUpdated()" />
   </div>
   <div class="w-60 space-y-1">
     <select
@@ -31,7 +31,7 @@
     <p class="text-sm text-neutral-700">
       {{ task.description }}
     </p>
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between gap-2 items-center">
       <div class="w-60 space-y-1">
         <select
           formControlName="status"
