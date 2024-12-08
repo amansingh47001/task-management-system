@@ -25,24 +25,24 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getAllTasks() {
-    return this.http.get('http://localhost:9000/api/tasks', {
+    return this.http.get('/api/tasks', {
       withCredentials: true,
     });
   }
 
   addTask(data: Task) {
-    return this.http.post('http://localhost:9000/api/task', data);
+    return this.http.post('/api/task', data);
   }
 
   editTask(id: string, data: Task) {
-    return this.http.put(`http://localhost:9000/api/task/${id}`, data);
+    return this.http.put(`/api/task/${id}`, data);
   }
 
   updateTaskStatus(id: string, status: 'pending' | 'completed') {
-    return this.http.patch(`http://localhost:9000/api/task/${id}`, { status });
+    return this.http.patch(`/api/task/${id}`, { status });
   }
 
   deleteTask(id: string) {
-    return this.http.delete(`http://localhost:9000/api/task/${id}`);
+    return this.http.delete(`/api/task/${id}`);
   }
 }
