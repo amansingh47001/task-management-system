@@ -33,3 +33,6 @@
 
 ### Update Task
 ![Register](./client//public//task/update-task.png)
+
+### Logout
+![Register](./client//public//task/logout-dialog.png)
