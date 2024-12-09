@@ -5,7 +5,8 @@
 ###### Client App
 1. Go into client folder
 2. Do npm i
-3. npm start
+3. Add http://localhost:9000 before /api in services
+4. npm start
 
 ###### Server App
 1. Go into server folder
